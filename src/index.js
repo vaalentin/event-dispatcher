@@ -10,12 +10,12 @@ export default class EventDispatcher {
   }
 
   /**
-   * @method dispatch
+   * @method dispatchEvent
    * @protected
    * @param {string} type
    * @param {any[]} args
    */
-  dispatch(type, ...args) {
+  dispatchEvent(type, ...args) {
     if(!this._listeners[type]) {
       return;
     }
@@ -57,6 +57,10 @@ export default class EventDispatcher {
     if(i !== -1) {
       this._listeners[type].splice(i, 1);
     }
+  }
+
+  dispose() {
+    
   }
 }
 
