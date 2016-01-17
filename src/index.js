@@ -14,6 +14,7 @@ export default class EventDispatcher {
    * @protected
    * @param {string} type
    * @param {any[]} args
+   * @returns {this}
    */
   dispatchEvent(type, ...args) {
     if(!this._listeners[type]) {
@@ -23,6 +24,8 @@ export default class EventDispatcher {
     for(let listener of this._listeners[type]) {
       listener(...args);
     }
+
+    return this;
   }
 
   /**
@@ -30,6 +33,7 @@ export default class EventDispatcher {
    * @public
    * @param {string} type
    * @param {(any) => any} cb
+   * @returns {this}
    */
   addEventListener(type, cb) {
     if(!this._listeners[type]) {
@@ -39,6 +43,8 @@ export default class EventDispatcher {
     if(this._listeners[type].indexOf(cb) === -1) {
       this._listeners[type].push(cb);
     }
+
+    return this;
   }
 
   /**
@@ -46,6 +52,7 @@ export default class EventDispatcher {
    * @public
    * @param {string} type
    * @param {(any) => any} cb
+   * @returns {this}
    */
   removeEventListener(type, cb) {
     if(!this._listeners[type]) {
@@ -57,6 +64,8 @@ export default class EventDispatcher {
     if(i !== -1) {
       this._listeners[type].splice(i, 1);
     }
+
+    return this;
   }
 
   dispose() {
