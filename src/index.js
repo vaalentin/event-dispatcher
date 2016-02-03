@@ -11,7 +11,7 @@ export default class EventDispatcher {
 
   /**
    * @method dispatchEvent
-   * @protected
+   * @public
    * @param {string} type
    * @param {any[]} args
    * @returns {this}
@@ -29,6 +29,14 @@ export default class EventDispatcher {
   }
 
   /**
+   * Alias for dispatchEvent
+   *
+   * @method trigger
+   * @public
+   */
+  trigger = this.dispatchEvent;
+
+  /**
    * @method addEventListener
    * @public
    * @param {string} type
@@ -40,12 +48,22 @@ export default class EventDispatcher {
       this._listeners[type] = [];
     }
 
-    if(this._listeners[type].indexOf(cb) === -1) {
-      this._listeners[type].push(cb);
+    if(this._listeners[type].indexOf(cb) !== -1) {
+      throw new Error('You can\'t add the same listener to the same event more than once');  
     }
+
+    this._listeners[type].push(cb);
 
     return this;
   }
+
+  /**
+   * Alias for addEventListener
+   *
+   * @method on
+   * @public
+   */
+  on = this.addEventListener;
 
   /**
    * @method removeEventListener
@@ -68,8 +86,20 @@ export default class EventDispatcher {
     return this;
   }
 
+  /**
+   * Alias for removeEventListener
+   *
+   * @method off
+   * @public
+   */
+  off = this.removeEventListener;
+
+  /**
+   * @method dispose
+   * @public
+   */
   dispose() {
-    
+    this._listeners = null;
   }
 }
 
