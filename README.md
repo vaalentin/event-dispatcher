@@ -1,10 +1,12 @@
-# @vaalentin/event-dispatcher
+# Event Dispatcher
+
+[![Build Status](https://travis-ci.org/vaalentin/event-dispatcher.svg?branch=master)](https://travis-ci.org/vaalentin/event-dispatcher)
 
 Simple event dispatcher.
 
 ## Installation
 
-```
+```sh
 $ npm install --save @vaalentin/event-dispatcher
 ```
 
@@ -36,16 +38,15 @@ Can be used directly, or extended.
 
 #### `dispatcher.addEventListener(type, cb)`
 
-`type` is a `string` representing the event name, `cb` is `function` that will
-be called with the data passed when using `dispatchEvent`.
+Add listener `cb` to `type`. `dispatcher.on(type, cb)` is an alias.
 
 #### `dispatcher.removeEventListener(type, cb)`
 
-This is the same as `addEventListener`, except that it removes the listener.
+Remove listener `cb` from 'type'. `dispatcher.off(type, cb)` is an alias.
 
-#### `dispatcher.dispatchEvent(type[, data])`
+#### `dispatcher.dispatchEvent(type, ...data)`
 
-Call all listeners of `type`, while passing `data`.
+Call all listeners of `type` and pass `data`. `dispatcher.trigger(type, ...data)` is an alias.
 
 #### `dispatcher.dispose()`
 
